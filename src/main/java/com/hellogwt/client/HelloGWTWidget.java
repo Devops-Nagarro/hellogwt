@@ -16,6 +16,7 @@
 package com.hellogwt.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -27,14 +28,14 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.Widget;
 import com.hellogwt.shared.domain.Greeting;
 import java.util.List;
 
 public class HelloGWTWidget extends Composite {
 
-    interface HelloGWTWidgetUiBinder extends UiBinder<Widget, HelloGWTWidget> {
+    interface HelloGWTWidgetUiBinder extends UiBinder<SplitLayoutPanel, HelloGWTWidget> {
     }
 
     private static HelloGWTWidgetUiBinder uiBinder = GWT.create(HelloGWTWidgetUiBinder.class);
@@ -85,6 +86,8 @@ public class HelloGWTWidget extends Composite {
     Button deleteButton;
     @UiField
     FlexTable greetingsFlexTable;
+    @UiField
+    SpanElement statusMessage;
 
     public HelloGWTWidget() {
         initWidget(uiBinder.createAndBindUi(this));
@@ -109,7 +112,7 @@ public class HelloGWTWidget extends Composite {
             greetingService.getGreeting(textTextBox.getText(), new AsyncCallback<Greeting>() {
                 @Override
                 public void onFailure(Throwable caught) {
-                    Window.alert("ERROR: Cannot find greeting!\n" + caught.getLocalizedMessage());
+                    statusMessage.setInnerText("ERROR: Cannot find greeting!\n" + caught.getLocalizedMessage());
                 }
 
                 @Override
@@ -117,7 +120,7 @@ public class HelloGWTWidget extends Composite {
                     if (result == null) {
                         greetingService.addGreeting(authorTextBox.getText(), textTextBox.getText(), btn_callback);
                     } else {
-                        Window.alert("Greeting already exists!");
+                        statusMessage.setInnerText("Greeting already exists!");
                     }
                 }
             });
