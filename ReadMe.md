@@ -1,6 +1,6 @@
 This project is a step-by-step Spring-GWT tutorial.
-It is inspired from the article written by Alex Tretyakov on 2011-10-23
-[Spring and GWT tutorial. Part 1 - Spring Configuration](http://alextretyakov.blogspot.fr/2011/10/spring-gwt-part-1-setting-spring.html).
+It is inspired from the article written by Alex Tretyakov on 2011-10-24
+[Spring and GWT tutorial. Part 2 - Adding GWT ](http://alextretyakov.blogspot.fr/2011/10/recently-ive-started-working-in-gwt.html).
 
 The project was created as a "Maven Project" in Eclipse.
 Then files from hellogwt were added.

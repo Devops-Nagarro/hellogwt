@@ -1,29 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 pom.xml contains description of all artifacts that our application requires.
-Now we need only spring-web artifact, which contains all necessary Spring libraries.
+We need spring-web artifact, which contains all necessary Spring libraries.
+Now, we add GWT (gwt-servlet and gwt-user artifacts) and Log4J  to our project.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>hellogwt</groupId>
     <artifactId>hellogwt</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
+    <version>0.0.1-SNAPSHOT</version>
     <name>HelloGWT</name>
     <description>Spring-GWT example</description>
     <properties>
         <spring.version>4.0.3.RELEASE</spring.version>
+        <spring4gwt.version>0.0.1</spring4gwt.version>
+        <spring4gwt.md5>640e1e3fc08f2e175cb52e7f922d47ad</spring4gwt.md5>
+        <!-- Convenience property to set the GWT version -->
+        <gwt.version>2.7.0</gwt.version>
+        <!-- Note: GWT needs at least java 1.6 -->
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
     <dependencies>
         <!-- Spring -->
         <dependency>
-            <version>${spring.version}</version>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <!-- GWT -->
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-servlet</artifactId>
+            <version>${gwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <version>${gwt.version}</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
+
     <build>
         <finalName>hellogwt</finalName>
+        <plugins>
+            <!-- GWT Maven Plugin-->
+            <plugin>
+                <!-- http://mojo.codehaus.org/gwt-maven-plugin/run-mojo.html -->
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>gwt-maven-plugin</artifactId>
+                <version>${gwt.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- $HOME/.m2/settings.xml
+            <server>
+                <id>Tomcat6</id>
+                <username>tomcat</username>
+                <password>tomcat</password>
+            </server>
+            -->
+            <plugin>
+                <!-- http://tomcat.apache.org/maven-plugin-2.2/context-goals.html -->
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat6-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <url>http://localhost:8080/manager/</url>
+                    <server>Tomcat6</server>
+                    <path>/hellogwt</path>
+                </configuration>
+            </plugin>
+            <!--
+            download-maven-plugin is used to download and cache other files
+            -->
+            <plugin>
+                <groupId>com.googlecode.maven-download-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <id>install-spring4gwt</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                        <configuration>
+                            <url>https://spring4gwt.googlecode.com/files/spring4gwt-${spring4gwt.version}.jar</url>
+                            <unpack>false</unpack>
+                            <outputDirectory>target/hellogwt/WEB-INF/lib/</outputDirectory>
+                            <md5>${spring4gwt.md5}</md5>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.13</version>
+                <configuration>
+                    <configLocation>config/sun_checks.xml</configLocation>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>
