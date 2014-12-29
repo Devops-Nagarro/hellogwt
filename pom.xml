@@ -23,8 +23,15 @@ Now, we add GWT (gwt-servlet and gwt-user artifacts) and Log4J  to our project.
         <gwt.version>2.7.0</gwt.version>
         <mybatis.version>3.2.1</mybatis.version>
         <mybatis-spring.version>1.2.0</mybatis-spring.version>
+        <!--
+        <mysql-connector-java.version>5.1.18</mysql-connector-java.version>
+        -->
+        <!-- http://mvnrepository.com/artifact/org.postgresql/postgresql -->
+        <!--
+        <postgresql-connector-java.version>9.3-1102-jdbc3</postgresql-connector-java.version>
+        -->
         <!-- http://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
-        <sqlite-jdbc.version>3.8.7</sqlite-jdbc.version>
+        <sqlite-connector-java.version>3.8.7</sqlite-connector-java.version>
         <!-- Note: GWT needs at least java 1.6 -->
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
@@ -43,6 +50,7 @@ Now, we add GWT (gwt-servlet and gwt-user artifacts) and Log4J  to our project.
             <artifactId>spring-jdbc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
         <!-- GWT -->
         <dependency>
             <groupId>com.google.gwt</groupId>
@@ -56,10 +64,23 @@ Now, we add GWT (gwt-servlet and gwt-user artifacts) and Log4J  to our project.
             <type>jar</type>
         </dependency>
         <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <version>${gwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-codeserver</artifactId>
+            <version>${gwt.version}</version>
+        </dependency>
+
+        <!-- log4j -->
+        <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
         </dependency>
+
         <!-- persistence -->
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -71,10 +92,22 @@ Now, we add GWT (gwt-servlet and gwt-user artifacts) and Log4J  to our project.
             <artifactId>mybatis-spring</artifactId>
             <version>${mybatis-spring.version}</version>
         </dependency>
+        <!--
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql-connector-java.version}</version>
+        </dependency>
+        -->
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-            <version>${sqlite-jdbc.version}</version>
+            <version>${sqlite-connector-java.version}</version>
         </dependency>
     </dependencies>
 

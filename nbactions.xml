@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+    <action>
+        <actionName>CUSTOM-Run GWT code server</actionName>
+        <displayName>Run GWT code server</displayName>
+        <goals>
+            <goal>gwt:run-codeserver</goal>
+        </goals>
+    </action>
+    <action>
+        <actionName>CUSTOM-Run GWT dev mode</actionName>
+        <displayName>Run GWT dev mode</displayName>
+        <goals>
+            <goal>gwt:run</goal>
+        </goals>
+        <properties>
+            <runTarget>hellogwt/</runTarget>
+        </properties>
+    </action>
+</actions>

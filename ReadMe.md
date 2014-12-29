@@ -45,3 +45,12 @@ You need to install those plugins:
 - Maven
 
 Click on `Run project` or type F6.
+
+= Debug the application =
+
+== In NetBeans ==
+
+1. Define breakpoints if needed.
+2. Click on `Debug Project` or type Ctrl+F5.
+3. In the project custom menu, click on `Run GWT code server`.
+4. Visit the url said by the code server to install the bookmarklet.
