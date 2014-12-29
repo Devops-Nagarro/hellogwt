@@ -22,4 +22,11 @@ XML module file for the com.hellogwt package.
 
     <!-- Specify the app entry point class.                         -->
     <entry-point class='com.hellogwt.client.HelloGWT'/>
+
+    <!-- Compile to JavaScript classes from com.hellogwt.client and com.hellogwt.shared packages. -->
+    <source path='client'/>
+    <source path='shared'/>
+
+    <!-- only compile for Firefox to speed up GWT compile time -->
+    <set-property name="user.agent" value="gecko1_8"/>
 </module>

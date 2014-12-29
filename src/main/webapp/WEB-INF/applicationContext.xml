@@ -5,14 +5,44 @@ It will contain all necessary beans declarations and settings.
 
 We will use Spring annotations instead of XML to configure application beans.
 To make it possible we should add <context:component-scan/> and set the package where beans are located.
+
+Definitions to use MyBatis:
+- propertyConfigurer with WEB-INF/jdbc.properties
+- dataSource
+- mapper scanner to know all mappers to domain object.
+  Mapper allows to execute SQL requests connected with domain object.
+  We can register every mapper as a bean, but also we can use a mapper scanner that knows about the package where all mappers are located.
+  Mappers are in com.hellogwt.server.persistence package. 
 -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
     <context:component-scan base-package="com.hellogwt"/>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+          p:location="/WEB-INF/jdbc.properties"/>
+
+    <!-- this needs spring-jdbc -->
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+          p:driverClassName="${jdbc.driverClassName}"
+          p:url="${jdbc.url}"
+          p:username="${jdbc.username}"
+          p:password="${jdbc.password}"/>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.hellogwt.server.persistence"/>
+    </bean>
+
 </beans>

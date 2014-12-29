@@ -1,9 +1,9 @@
 This project is a step-by-step Spring-GWT tutorial.
-It is inspired from the article written by Alex Tretyakov on 2011-11-25
-[Spring and GWT tutorial. Part 3 - GWT RPC Services](http://alextretyakov.blogspot.fr/2011/10/developing-simple-web-application-using.html).
+It is inspired from the article written by Alex Tretyakov on 2011-11-14
+[Spring and GWT tutorial. Part 4 - MyBatis and MySQL](http://alextretyakov.blogspot.fr/2011/11/developing-simple-web-application-using.html).
 
 The project was created as a "Maven Project" in Eclipse.
-Then files from hellogwt were added.
+Then files from hellogwt were added, commented and modified to run with SQLite instead of MySQL.
 
 The source code is licensed under [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
