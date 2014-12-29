@@ -18,6 +18,7 @@ Now, we add GWT (gwt-servlet and gwt-user artifacts) and Log4J  to our project.
         <spring.version>4.0.3.RELEASE</spring.version>
         <spring4gwt.version>0.0.1</spring4gwt.version>
         <spring4gwt.md5>640e1e3fc08f2e175cb52e7f922d47ad</spring4gwt.md5>
+        <log4j.version>1.2.16</log4j.version>
         <!-- Convenience property to set the GWT version -->
         <gwt.version>2.7.0</gwt.version>
         <!-- Note: GWT needs at least java 1.6 -->
@@ -45,6 +46,11 @@ Now, we add GWT (gwt-servlet and gwt-user artifacts) and Log4J  to our project.
             <version>${gwt.version}</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -66,11 +72,15 @@ Now, we add GWT (gwt-servlet and gwt-user artifacts) and Log4J  to our project.
                 </executions>
             </plugin>
             <!-- $HOME/.m2/settings.xml
-            <server>
-                <id>Tomcat6</id>
-                <username>tomcat</username>
-                <password>tomcat</password>
-            </server>
+<settings>
+    <servers>
+        <server>
+            <id>Tomcat6</id>
+            <username>tomcat</username>
+            <password>tomcat</password>
+        </server>
+    </servers>
+</settings>
             -->
             <plugin>
                 <!-- http://tomcat.apache.org/maven-plugin-2.2/context-goals.html -->

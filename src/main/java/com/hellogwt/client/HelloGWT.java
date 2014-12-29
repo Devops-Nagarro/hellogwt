@@ -16,17 +16,47 @@
 package com.hellogwt.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
 
 /**
  * @author Alex Tretyakov
  */
 public class HelloGWT implements EntryPoint {
+    private GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+    private TextBox nameTextBox = new TextBox();
+    private Label greetingLabel = new Label("Hello, GWT!");
 
-    @Override
+    /**
+     * Use our service GreetingService in application.
+     * 
+     * We will invoke greet() method every time any symbol is entered into the text field.
+     * If greet() completes successfully then label text will change to String that method returns.
+     * Otherwise label text will tell us about error.
+     */
     public void onModuleLoad() {
-        Label greetingLabel = new Label("Hello, GWT!");
+        RootPanel.get().add(nameTextBox);
         RootPanel.get().add(greetingLabel);
+
+        final AsyncCallback<String> callback = new AsyncCallback<String>() {
+            public void onFailure(Throwable caught) {
+                greetingLabel.setText("ERROR!");
+            }
+
+            public void onSuccess(String result) {
+                greetingLabel.setText(result);
+            }
+        };
+
+        nameTextBox.addKeyUpHandler(new KeyUpHandler() {
+            public void onKeyUp(KeyUpEvent keyUpEvent) {
+                greetingService.greet(nameTextBox.getText(), callback);
+            }
+        });
     }
 }

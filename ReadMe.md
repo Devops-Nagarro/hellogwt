@@ -1,6 +1,6 @@
 This project is a step-by-step Spring-GWT tutorial.
-It is inspired from the article written by Alex Tretyakov on 2011-10-24
-[Spring and GWT tutorial. Part 2 - Adding GWT ](http://alextretyakov.blogspot.fr/2011/10/recently-ive-started-working-in-gwt.html).
+It is inspired from the article written by Alex Tretyakov on 2011-11-25
+[Spring and GWT tutorial. Part 3 - GWT RPC Services](http://alextretyakov.blogspot.fr/2011/10/developing-simple-web-application-using.html).
 
 The project was created as a "Maven Project" in Eclipse.
 Then files from hellogwt were added.
@@ -21,6 +21,14 @@ The source code is licensed under [Apache License 2.0](http://www.apache.org/lic
 6. Start the server
    `~/bin/apache-tomcat-6.0.43/bin/startup.sh`.
 7. Go to http://localhost:8080/hellogwt/.
+
+If you have configured `$HOME/.m2/settings.xml` with a server called Tomcat6:
+
+1. If Tomcat is not running, start it.
+   `~/bin/apache-tomcat-6.0.43/bin/startup.sh`
+2. Build and deploy the project by executing `mvn tomcat6:deploy` command.
+   You can use `mvn tomcat6:redeploy` if the war was deployed.
+3. Go to http://localhost:8080/hellogwt/.
 
 == In Eclipse ==
 
