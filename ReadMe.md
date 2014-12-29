@@ -1,6 +1,6 @@
 This project is a step-by-step Spring-GWT tutorial.
-It is inspired from the article written by Alex Tretyakov on 2011-11-14
-[Spring and GWT tutorial. Part 4 - MyBatis and MySQL](http://alextretyakov.blogspot.fr/2011/11/developing-simple-web-application-using.html).
+It is inspired from the article written by Alex Tretyakov on 2012-08-30
+[Spring and GWT tutorial. Part 5 - UiBinder](http://alextretyakov.blogspot.fr/2012/08/using-uibinder.html).
 
 The project was created as a "Maven Project" in Eclipse.
 Then files from hellogwt were added, commented and modified to run with SQLite instead of MySQL.
