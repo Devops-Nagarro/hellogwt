@@ -125,9 +125,33 @@ Now, we add GWT (gwt-servlet and gwt-user artifacts) and Log4J  to our project.
                         <goals>
                             <goal>compile</goal>
                             <goal>test</goal>
+                            <goal>i18n</goal>
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <!--
+                    use -extra parameter to generate I18N properties files.
+                    .properties files will be generated in target/extra/hellogwt/
+                    -->
+                    <extraParam>true</extraParam>
+                    <!--
+                    The resourceBundle parameter is used to declare
+                    your application bundle for i18n processing.
+                    If your application uses more than one bundle,
+                    you can nest multiple resourceBundle elements
+                    -->
+                    <resourceBundle>com.hellogwt.client.i18n</resourceBundle>
+                    <!--
+                    which properties file to translate.
+                    -->
+                    <i18nConstantsBundles>
+                        <i18nConstantsBundle>com.hellogwt.client.i18n.ClientMessages</i18nConstantsBundle>
+                    </i18nConstantsBundles>
+                    <i18nMessagesBundle>com.hellogwt.client.i18n.ClientMessages</i18nMessagesBundle>
+                    <!--
+                    -->
+                </configuration>
             </plugin>
             <!-- $HOME/.m2/settings.xml
 <settings>

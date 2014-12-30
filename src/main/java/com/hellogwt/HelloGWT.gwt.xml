@@ -29,4 +29,8 @@ XML module file for the com.hellogwt package.
 
     <!-- only compile for Firefox to speed up GWT compile time -->
     <set-property name="user.agent" value="gecko1_8"/>
+    
+    <inherits name="com.google.gwt.i18n.I18N"/>
+    <extend-property name="locale" values="fr"/>
+    <extend-property name="locale" values="en"/>
 </module>

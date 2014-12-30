@@ -34,7 +34,7 @@ public class GreetingServiceImpl implements GreetingService {
 
     @Autowired
     private GreetingMapper greetingMapper;
-
+    
     @Override
     public Greeting getGreeting(String text) {
         return greetingMapper.getGreeting(text);

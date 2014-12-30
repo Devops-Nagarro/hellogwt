@@ -30,6 +30,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
+import com.hellogwt.client.i18n.ClientMessages;
 import com.hellogwt.shared.domain.Greeting;
 import java.util.List;
 
@@ -41,11 +42,13 @@ public class HelloGWTWidget extends Composite {
     private static HelloGWTWidgetUiBinder uiBinder = GWT.create(HelloGWTWidgetUiBinder.class);
 
     private GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
+    
+    private ClientMessages clientMsg = GWT.create(ClientMessages.class);
 
     final AsyncCallback<String> textbox_callback = new AsyncCallback<String>() {
         @Override
         public void onFailure(Throwable caught) {
-            greetingLabel.setText("ERROR!");
+            greetingLabel.setText(clientMsg.error());
         }
 
         @Override
@@ -57,7 +60,7 @@ public class HelloGWTWidget extends Composite {
     private AsyncCallback<Void> btn_callback = new AsyncCallback<Void>() {
         @Override
         public void onFailure(Throwable caught) {
-            Window.alert("ERROR: Cannot edit greetings!");
+            Window.alert(clientMsg.editError());
         }
 
         @Override
@@ -120,7 +123,7 @@ public class HelloGWTWidget extends Composite {
                     if (result == null) {
                         greetingService.addGreeting(authorTextBox.getText(), textTextBox.getText(), btn_callback);
                     } else {
-                        statusMessage.setInnerText("Greeting already exists!");
+                        statusMessage.setInnerText(clientMsg.greetingAlreadyExists());
                     }
                 }
             });
@@ -160,8 +163,8 @@ public class HelloGWTWidget extends Composite {
     private void fillGreetingsTable(List<Greeting> greetings) {
         greetingsFlexTable.removeAllRows();
 
-        greetingsFlexTable.setText(0, 0, "Author");
-        greetingsFlexTable.setText(0, 1, "Text");
+        greetingsFlexTable.setText(0, 0, clientMsg.author());
+        greetingsFlexTable.setText(0, 1, clientMsg.text());
 
         for (Greeting greeting : greetings) {
             int row = greetingsFlexTable.getRowCount();
