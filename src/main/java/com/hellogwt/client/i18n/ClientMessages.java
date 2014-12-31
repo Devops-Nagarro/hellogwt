@@ -26,6 +26,9 @@ import com.google.gwt.i18n.client.Messages;
 @DefaultLocale("en")
 public interface ClientMessages extends Messages {
 
+    @DefaultMessage("About the sample application")
+    public String aboutDialogTitle();
+
     @DefaultMessage("Author")
     public String author();
     

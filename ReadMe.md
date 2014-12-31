@@ -48,6 +48,11 @@ Click on `Run project` or type F6.
 
 = Debug the application =
 
+== In Maven ==
+
+- `mvn compile` only compiles Java sources.
+- `mvn gwt:compile` only compiles GWT module and writes extras.
+
 == In NetBeans ==
 
 1. Define breakpoints if needed.

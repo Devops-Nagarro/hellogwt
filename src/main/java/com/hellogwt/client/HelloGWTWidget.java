@@ -24,6 +24,7 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -42,7 +43,7 @@ public class HelloGWTWidget extends Composite {
     private static HelloGWTWidgetUiBinder uiBinder = GWT.create(HelloGWTWidgetUiBinder.class);
 
     private GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-    
+
     private ClientMessages clientMsg = GWT.create(ClientMessages.class);
 
     final AsyncCallback<String> textbox_callback = new AsyncCallback<String>() {
@@ -93,13 +94,15 @@ public class HelloGWTWidget extends Composite {
     SpanElement statusMessage;
     @UiField
     SpanElement persistenceClassName;
+    @UiField
+    Anchor aboutLink;
 
     public HelloGWTWidget() {
         initWidget(uiBinder.createAndBindUi(this));
         greetingService.persistenceClassName(new AsyncCallback<String>() {
             @Override
             public void onFailure(Throwable caught) {
-                statusMessage.setInnerHTML(clientMsg.error() + caught.getLocalizedMessage()); 
+                statusMessage.setInnerHTML(clientMsg.error() + caught.getLocalizedMessage());
             }
             @Override
             public void onSuccess(String result) {
@@ -120,7 +123,7 @@ public class HelloGWTWidget extends Composite {
     void handleNameTextBoxKeyUp(KeyUpEvent keyUpEvent) {
         greetingService.greet(nameTextBox.getText(), textbox_callback);
     }
-    
+
     @UiHandler("addButton")
     void handleAddButtonClick(ClickEvent clickEvent) {
         if (!authorTextBox.getText().isEmpty() && !textTextBox.getText().isEmpty()) {
@@ -156,6 +159,18 @@ public class HelloGWTWidget extends Composite {
     @UiHandler("deleteButton")
     void handleDeleteButtonClick(ClickEvent clickEvent) {
         greetingService.deleteGreeting(textTextBox.getText(), btn_callback);
+    }
+
+    @UiHandler("aboutLink")
+    /**
+     * When the 'About' item is selected, show the AboutDialog.
+     *
+     * Note that showing a dialog box does not block -- execution continues normally, and the dialog fires an event when it is closed.
+     */
+    void handleAboutLinkClick(ClickEvent event) {
+        AboutDialog dlg = new AboutDialog();
+        dlg.show();
+        dlg.center();
     }
 
     private void refreshGreetingsTable() {

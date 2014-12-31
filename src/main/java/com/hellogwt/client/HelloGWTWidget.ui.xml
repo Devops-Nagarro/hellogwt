@@ -80,6 +80,9 @@ removing the package prefix "com.hellogwt.client.".
                         <a href="?locale=en">English</a>
                     </p>
                 </g:HTML>
+                <g:Anchor href='javascript:;' ui:field='aboutLink'>
+                    <ui:msg key="about">About</ui:msg>
+                </g:Anchor>
             </g:FlowPanel>
         </g:south>
     </g:SplitLayoutPanel>
