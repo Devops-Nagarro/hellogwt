@@ -3,6 +3,10 @@
  * 
  * Class Greeting is used by server and client parts of application,
  * so it should be created in com.hellogwt.shared.domain package.
+ * 
+ * It is mandatory that this standard Java POJO implements java.io.Serializable
+ * or com.google.gwt.user.client.rpc.IsSerializable and has a no-argument
+ * constructor!
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +23,18 @@
 package com.hellogwt.shared.domain;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity  
+@Table(name= "greetings") 
 public class Greeting implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String author;
     private String text;

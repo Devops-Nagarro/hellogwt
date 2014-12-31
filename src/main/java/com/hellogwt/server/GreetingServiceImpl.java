@@ -16,7 +16,7 @@
 package com.hellogwt.server;
 
 import com.hellogwt.client.GreetingService;
-import com.hellogwt.server.persistence.GreetingMapper;
+import com.hellogwt.server.persistence.GreetingPersistence;
 import com.hellogwt.shared.domain.Greeting;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +24,24 @@ import org.springframework.stereotype.Service;
 
 /**
  * A class that implements GreetingService interface in com.hellogwt.server
- * package. Don't forget to annotate it with @Service. Class GreetingServiceImpl
+ * package.
+ * 
+ * Don't forget to annotate it with @Service. Class GreetingServiceImpl
  * implements method greet(). In our case the method takes one String as an
  * argument, builds another String and returns it. Implements all declared CRUD
  * methods in service GreetingServiceImpl using created mapper.
+ * 
+ * @Transactional annotation provided by Spring:
+ * when a method is annotated by this annotation, Spring will inject
+ * transaction support code into the method - thus we don’t have two write any
+ * code to handle transaction explicitly.
  */
 @Service("greetingService")
 public class GreetingServiceImpl implements GreetingService {
 
     @Autowired
-    private GreetingMapper greetingMapper;
-    
+    private GreetingPersistence greetingMapper;
+
     @Override
     public Greeting getGreeting(String text) {
         return greetingMapper.getGreeting(text);
@@ -63,5 +70,10 @@ public class GreetingServiceImpl implements GreetingService {
     @Override
     public String greet(String name) {
         return "Hello, " + name + "!";
+    }
+    
+    @Override
+    public String persistenceClassName() {
+        return (greetingMapper instanceof com.hellogwt.server.persistence.GreetingMapper ? "MyBatis": "Hibernate");
     }
 }

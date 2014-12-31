@@ -74,6 +74,7 @@ removing the package prefix "com.hellogwt.client.".
                     <span ui:field="statusMessage">
                         <ui:msg key="defaultStatusMessage" meaning="Default status message.">Application is loaded.</ui:msg>
                     </span>
+                    <span ui:field="persistenceClassName"></span>
                     <p>
                         <a href="?locale=fr">français</a>,
                         <a href="?locale=en">English</a>

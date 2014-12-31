@@ -13,6 +13,7 @@ Deployment descriptor web.xml contains:
     <!-- location of log4j config file -->
     <context-param>
         <param-name>log4jConfigLocation</param-name>
+        <!-- syntax: http://wiki.apache.org/logging-log4j/Log4jXmlFormat -->
         <param-value>/WEB-INF/log4j.xml</param-value>
     </context-param>
     <listener>

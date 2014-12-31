@@ -91,9 +91,21 @@ public class HelloGWTWidget extends Composite {
     FlexTable greetingsFlexTable;
     @UiField
     SpanElement statusMessage;
+    @UiField
+    SpanElement persistenceClassName;
 
     public HelloGWTWidget() {
         initWidget(uiBinder.createAndBindUi(this));
+        greetingService.persistenceClassName(new AsyncCallback<String>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                statusMessage.setInnerHTML(clientMsg.error() + caught.getLocalizedMessage()); 
+            }
+            @Override
+            public void onSuccess(String result) {
+                persistenceClassName.setInnerHTML(result);
+            }
+        });
         refreshGreetingsTable();
     }
 

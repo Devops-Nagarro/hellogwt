@@ -22,7 +22,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-public interface GreetingMapper {
+public interface GreetingMapper extends GreetingPersistence {
 
     @Select("SELECT * FROM greetings WHERE text = #{text}")
     Greeting getGreeting(@Param("text") String text);

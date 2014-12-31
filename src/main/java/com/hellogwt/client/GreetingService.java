@@ -36,4 +36,6 @@ public interface GreetingService extends RemoteService {
     List<Greeting> getGreetings();
     
     String greet(String name);
+    
+    String persistenceClassName();
 }

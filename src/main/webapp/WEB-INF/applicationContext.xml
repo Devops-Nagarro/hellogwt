@@ -12,23 +12,36 @@ Definitions to use MyBatis:
 - mapper scanner to know all mappers to domain object.
   Mapper allows to execute SQL requests connected with domain object.
   We can register every mapper as a bean, but also we can use a mapper scanner that knows about the package where all mappers are located.
-  Mappers are in com.hellogwt.server.persistence package. 
+  Mappers are in com.hellogwt.server.persistence package.
 -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/jdbc
+        http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        ">
 
-    <context:component-scan base-package="com.hellogwt"/>
+    <context:component-scan base-package="com.hellogwt">
+        <!-- exclude MyBatis Mapper when using Hibernate -->
+        <context:exclude-filter type="regex" expression="com\.hellogwt\.server\.persistence\..*Mapper"/>
+        <!--
+        -->
+        <!-- exclude Hibernate DAO when using MyBatis -->
+        <!--
+        <context:exclude-filter type="regex" expression="com\.hellogwt\.server\.persistence\..*DAO"/>
+        -->
+    </context:component-scan>
 
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-
+    <!-- Read jdbc.properties -->
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
           p:location="/WEB-INF/jdbc.properties"/>
@@ -41,8 +54,42 @@ Definitions to use MyBatis:
           p:username="${jdbc.username}"
           p:password="${jdbc.password}"/>
 
+    <!-- Database initializer. If any of the script fails, the initialization stops. -->
+    <jdbc:initialize-database data-source="dataSource">
+        <jdbc:script location="${jdbc.initLocation}"/>
+    </jdbc:initialize-database>
+
+    <!-- MyBatis scans for all mappers -->
+    <!--
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.hellogwt.server.persistence"/>
     </bean>
+    -->
 
+    <!-- Hibernate DAO -->
+    <!--
+    -->
+    <bean id="hSessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+          destroy-method="destroy">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="com.hellogwt.shared.domain"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+                <prop key="hibernate.id.new_generator_mappings">true</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
+        <property name="sessionFactory" ref="hSessionFactory"/>
+    </bean>
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+          p:sessionFactory-ref="hSessionFactory"/>
+    <tx:annotation-driven/>
 </beans>

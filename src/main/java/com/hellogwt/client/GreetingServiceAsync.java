@@ -32,4 +32,6 @@ public interface GreetingServiceAsync {
     void getGreetings(AsyncCallback<List<Greeting>> async);
 
     void greet(String name, AsyncCallback<String> callback);
+
+    void persistenceClassName(AsyncCallback<String> callback);
 }
