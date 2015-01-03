@@ -2,14 +2,30 @@ This project is a step-by-step Spring-GWT tutorial.
 It is inspired from the article written by Alex Tretyakov on 2012-08-30
 [Spring and GWT tutorial. Part 5 - UiBinder](http://alextretyakov.blogspot.fr/2012/08/using-uibinder.html).
 
-The project was created as a "Maven Project" in Eclipse.
+The project was created as a "Maven Project" with GWT cli-tool.
 Then files from hellogwt were added, commented and modified to run with SQLite instead of MySQL.
 
-The source code is licensed under [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+# Steps
 
-= Run the application =
+These are the steps:
 
-== In command line ==
+1. Spring Configuration
+2. Adding GWT
+3. GWT RPC services
+4. MyBatis and SQLite
+5. UIBinder
+6. Using a SplitLayoutPanel
+7. Internationalisation
+8. Hibernate and H2 (keeping MyBatis and SQLite in the configuration)
+ 
+Next steps:
+
+10. Unit tests
+11. Use of GXT
+
+# Run the application
+
+## In command line
 
 1. Build the project by executing `mvn clean install` command.
    Now we have application war-file.
@@ -30,14 +46,14 @@ If you have configured `$HOME/.m2/settings.xml` with a server called Tomcat6:
    You can use `mvn tomcat6:redeploy` if the war was deployed.
 3. Go to http://localhost:8080/hellogwt/.
 
-== In Eclipse ==
+## In Eclipse
 
 You need to install those plug-ins:
 - Eclipse Git Team Provider
 
 Right-click on project and click on `Run As > Run on Server`.
 
-== In NetBeans ==
+## In NetBeans
 
 You need to install those plugins:
 - GWT4NB
@@ -46,16 +62,20 @@ You need to install those plugins:
 
 Click on `Run project` or type F6.
 
-= Debug the application =
+# Development
 
-== In Maven ==
+## In Maven
 
 - `mvn compile` only compiles Java sources.
 - `mvn gwt:compile` only compiles GWT module and writes extras.
 
-== In NetBeans ==
+## In NetBeans
 
 1. Define breakpoints if needed.
 2. Click on `Debug Project` or type Ctrl+F5.
 3. In the project custom menu, click on `Run GWT code server`.
 4. Visit the url said by the code server to install the bookmarklet.
+
+# License
+
+The source code is licensed under [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
