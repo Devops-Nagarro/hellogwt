@@ -60,6 +60,13 @@ Now, we add GWT (gwt-servlet and gwt-user artifacts) and Log4J  to our project.
             <artifactId>spring-orm</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.spring4gwt</groupId>
+            <artifactId>spring4gwt</artifactId>
+            <version>${spring4gwt.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/target/hellogwt/WEB-INF/lib/spring4gwt-${spring4gwt.version}.jar</systemPath>
+        </dependency>
 
         <!-- GWT -->
         <dependency>

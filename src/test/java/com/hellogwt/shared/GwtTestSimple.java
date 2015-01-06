@@ -29,7 +29,7 @@ public class GwtTestSimple extends GWTTestCase {
      */
     @Override
     public String getModuleName() {
-        return "com.hellogwt.HelloGWT";
+        return "com.hellogwt.HelloGWTJUnit";
     }
 
     public void testSimple() {

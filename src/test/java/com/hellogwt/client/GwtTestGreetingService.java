@@ -21,14 +21,13 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 /**
- *
- * @author Olivier Maury <Olivier.Maury@paca.inra.fr>
+ * Testing a RPC service.
  */
 public class GwtTestGreetingService extends GWTTestCase {
 
     @Override
     public String getModuleName() {
-        return "com.hellogwt.HelloGWT";
+        return "com.hellogwt.HelloGWTJUnit";
     }
 
     /**
