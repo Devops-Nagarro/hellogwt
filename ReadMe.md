@@ -18,10 +18,10 @@ These are the steps:
 7. Internationalisation
 8. Hibernate and H2 (keeping MyBatis and SQLite in the configuration)
 9. JUnit tests
+10. GWT unit tests
  
 Next steps:
 
-10. GWT unit tests
 11. Use of GXT
 
 # Run the application
