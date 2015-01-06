@@ -17,10 +17,11 @@ These are the steps:
 6. Using a SplitLayoutPanel
 7. Internationalisation
 8. Hibernate and H2 (keeping MyBatis and SQLite in the configuration)
+9. JUnit tests
  
 Next steps:
 
-10. Unit tests
+10. GWT unit tests
 11. Use of GXT
 
 # Run the application
@@ -68,6 +69,8 @@ Click on `Run project` or type F6.
 
 - `mvn compile` only compiles Java sources.
 - `mvn gwt:compile` only compiles GWT module and writes extras.
+- `mvn test` run JUnit tests.
+- `mvn gwt:test` run GWT unit tests.
 
 ## In NetBeans
 
@@ -75,6 +78,9 @@ Click on `Run project` or type F6.
 2. Click on `Debug Project` or type Ctrl+F5.
 3. In the project custom menu, click on `Run GWT code server`.
 4. Visit the url said by the code server to install the bookmarklet.
+
+- To run JUnit tests, in the project menu, click on `Test`.
+- To run GWT unit tests, in the project custom menu, click on `Run GWT unit tests`.
 
 # License
 

@@ -17,4 +17,11 @@
             <runTarget>hellogwt/</runTarget>
         </properties>
     </action>
+    <action>
+        <actionName>CUSTOM-Run GWT unit tests</actionName>
+        <displayName>Run GWT unit tests</displayName>
+        <goals>
+            <goal>gwt:test</goal>
+        </goals>
+    </action>
 </actions>

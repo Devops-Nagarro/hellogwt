@@ -129,7 +129,15 @@ Now, we add GWT (gwt-servlet and gwt-user artifacts) and Log4J  to our project.
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
-        </dependency>        
+        </dependency>
+
+        <!-- Testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -171,9 +179,17 @@ Now, we add GWT (gwt-servlet and gwt-user artifacts) and Log4J  to our project.
                     </i18nConstantsBundles>
                     <i18nMessagesBundle>com.hellogwt.client.i18n.ClientMessages</i18nMessagesBundle>
                     <!--
+                    Unit tests:
+                    Default naming convention of the Maven GWT plugin :
+                    *Test.java for standard unit tests and
+                    GwtTest*.java for GWT test cases.
                     -->
+                    <!-- Run tests using HtmlUnit -->
+                    <mode>htmlunit</mode>
                 </configuration>
             </plugin>
+
+            <!-- Tomcat deployment -->
             <!-- $HOME/.m2/settings.xml
 <settings>
     <servers>
@@ -196,6 +212,7 @@ Now, we add GWT (gwt-servlet and gwt-user artifacts) and Log4J  to our project.
                     <path>/hellogwt</path>
                 </configuration>
             </plugin>
+
             <!--
             download-maven-plugin is used to download and cache other files
             -->
