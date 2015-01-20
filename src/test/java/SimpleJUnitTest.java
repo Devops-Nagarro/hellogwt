@@ -22,8 +22,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- *
- * @author Olivier Maury <Olivier.Maury@paca.inra.fr>
  */
 public class SimpleJUnitTest {
     
